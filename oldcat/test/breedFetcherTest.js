@@ -1,4 +1,6 @@
-const { fetchBreedDescription } = require('../newbreedFetcher');
+// breedFetcherTest.js
+
+const { fetchBreedDescription } = require('../breedFetcher');
 const { assert } = require('chai');
 
 describe('fetchBreedDescription', () => {
@@ -16,17 +18,14 @@ describe('fetchBreedDescription', () => {
     });
   });
 
-  it('returns error for an invalid breed, via callback', (done) => {
-    fetchBreedDescription('dog', (err, desc) => {
-      // we expect error for this scenario
-      assert.equal(desc, undefined);
+  it('returns an error description for a invalid/non-existent breed, via callback', (done) => {
+    fetchBreedDescription('555555', (err, desc) => {
+      assert.equal(desc, null);
 
-      const expectedDesc = 'error';
+      const expectedDesc = "error";
 
-      // compare returned description
       assert.equal(expectedDesc, err);
-
       done();
-    });
-  });
+    })
+  })
 });
